@@ -15,6 +15,7 @@ public class Cell : MonoBehaviour
     [SerializeField] public Button button;
     public ICell cellDelegate;
     [SerializeField] Button cellButton;
+    //셀 이름 프로퍼티
     public string Title
     {
         get
@@ -27,6 +28,7 @@ public class Cell : MonoBehaviour
             this.title.text = value;
         }
     }
+    //셀 이미지 프로퍼티
     public Sprite Sprite
     {
         get
@@ -38,6 +40,7 @@ public class Cell : MonoBehaviour
             this.titleImage.sprite = value;
         }
     }
+    //삭제 버튼 온 오프 프로퍼티
     public bool ActiveDelete
     {
         get
@@ -61,6 +64,7 @@ public class Cell : MonoBehaviour
         this.ActiveDelete = false;
         cellButton.GetComponent<Button>();
     }
+    //셀 클릭 시 할 일
     public void OnClick()
     {
         cellDelegate.DidSelectCell(this);

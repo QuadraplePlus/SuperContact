@@ -10,20 +10,25 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
     [SerializeField] GameObject addPopupViewPrefab;
     [SerializeField] GameObject detailViewPrefab;
     [SerializeField] GameObject cautionPanelPrefab;
+    [SerializeField] RectTransform content;
 
+    //Cell 인덱스 관리용 리스트
     List<Cell> cellList = new List<Cell>();
 
+    //기본 스프라이트
     Sprite defaultSprite;
 
     public static Action<bool> activeAction;
+
+    // 셀 삭제버튼이 눌러졌을때 전달할 델리게이트
     public delegate void DeletedSelct();
     public DeletedSelct deletedSelct;
-    //셀의 편집 버튼 관련 변수
+    //셀의 버튼 온 오프 관련 변수
     bool isSelectCell = false;
 
-    [SerializeField] RectTransform content;
-
+    //셀의 y축 길이
     float cellHeight = 330f;
+    //편집모드 온 오프 토글 판단여부
     bool deleteMode = false;
     
     Contacts? contacts;
@@ -33,6 +38,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
         title = "수퍼연락처";
         isSelectCell = true;
 
+        //편집버튼 생성 및 토글 
         leftNavgationViewButton = Instantiate(buttonPrefab).GetComponent<SCButton>();
         leftNavgationViewButton.SetTitle((deleteMode) ? "완료" : "편집");
         leftNavgationViewButton.SetOnClickAction(() =>
@@ -79,6 +85,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             // AddPopupViewManager 열기
             addPopupViewManager.Open();
         });
+        //디폴트 이미지 지정
         defaultSprite = Resources.Load<Sprite>(Constant.kDefaultUserImage);
     }
     private void Start() 
@@ -150,6 +157,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             content.sizeDelta = Vector2.zero;
         }
     }
+    //앱 종료시 저장
     void OnApplicationQuit()
     {
         if (contacts.HasValue)
@@ -176,7 +184,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             {
                 detailViewManager.userImage.sprite = defaultSprite;
             }
-                
+            
             detailViewManager.saveDelegate = (newContact) =>
             {
                 contacts.Value.contactList[cellIndex] = newContact;
@@ -186,6 +194,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             mainManager.PresentViewManager(detailViewManager);     
         } 
     }
+    //Cell 리스트에 있는 모든 셀을 삭제
     public void ClearCell()
     {
         foreach (Cell cell in cellList)
@@ -194,6 +203,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
         }
         cellList.RemoveRange(0, cellList.Count);
     }
+    //셀 삭제 로직
     public void DeleteCell(Cell cell)
     {
         CormfirmPopupViewManager cautionManager

@@ -2,6 +2,7 @@
 {
     public delegate void AgreeDelete();
     public AgreeDelete deleteAction;
+
     // Start is called before the first frame update
     public void AgreeDeleted()
     {

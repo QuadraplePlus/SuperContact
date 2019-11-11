@@ -13,6 +13,7 @@ public class AddPopupViewManager : PopupViewManager
     [SerializeField] Image userImage;
     [SerializeField] GameObject PeekPopupViewPrefab;
     
+    //추가 버튼을 눌렀을때 실행할 델리게이트 함수
     public delegate void AddContact(Contact contact);
     public AddContact addContactCallback;
 
@@ -20,6 +21,7 @@ public class AddPopupViewManager : PopupViewManager
     {
         base.Awake();
         Debug.Log("자식의 Start()");
+        //PeekPicturePopupViewManager 의 액션함수로부터 스프라이트 전달받음
         PeekPicturePopupViewManager.sendImage = (sprite) =>
         {
             userImage.GetComponent<Image>().sprite = sprite;
@@ -27,6 +29,7 @@ public class AddPopupViewManager : PopupViewManager
     }
     private void OnEnable()
     {
+        //인풋필드 초기화
         InitInputField(nameInputField);
         InitInputField(phoneNumberInputField);
         InitInputField(emailInputField);
@@ -83,6 +86,7 @@ public class AddPopupViewManager : PopupViewManager
             contact.name = name;
             contact.phoneNumber = phoneNumber;
             contact.email = email;
+
             if (userImage.sprite)
                 contact.photoName = userImage.sprite.name;
 
@@ -117,6 +121,7 @@ public class AddPopupViewManager : PopupViewManager
         inputField.text = "";
         inputField.image.color = Color.white;
     }
+    //사진을 고르는 팝업창 
     public void PeekPopup()
     {
         PeekPicturePopupViewManager peekPicturePopupViewManager

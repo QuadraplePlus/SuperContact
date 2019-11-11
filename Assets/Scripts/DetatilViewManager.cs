@@ -5,8 +5,10 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
 
+//인풋필드의 확장 클래스
 public static class SCInptuField
 {
+    //온 오프 시 글자색 및 인풋필드 활성화 비활성화
     public static void SetImnutable(this InputField inputField ,bool editMode)
     {
         Debug.Log("!!");
@@ -33,17 +35,16 @@ public class DetatilViewManager : ViewManager
     [SerializeField] public Image userImage;
     [SerializeField] Button saveButton;
     [SerializeField] Button imageButton;
-    [SerializeField] GameObject thirdView;
     [SerializeField] GameObject PeekPopupViewPrefab;
-    //[SerializeField] ThirdViewManager thirdViewManager;
+    [HideInInspector] public Contact? contact;
 
+    //디테일 뷰에서 수정후 저장 했을 시 정보를 전달할 델리게이트함수
     public delegate void DetailViewManagerSaveDelegate(Contact contact);
     public DetailViewManagerSaveDelegate saveDelegate;
 
-    public Contact? contact;
     EventSystem system;
-    Animator animator;
     
+    //에디트모드 온 오프 확인여부
     bool editMode = true;
 
  
@@ -59,11 +60,14 @@ public class DetatilViewManager : ViewManager
         {
             ToggleSetEditMode();
         });
+
+        //PeekPicturePopupViewManager 에서 액션함수로 전달받은 스프라이트 정보
         PeekPicturePopupViewManager.sendImage = (sprite) =>
         {
             userImage.sprite = sprite;
         };
     }
+    //에디트 모드 토글
     void ToggleSetEditMode(bool updateInputField = false)
     {
         editMode = !editMode;
@@ -98,13 +102,13 @@ public class DetatilViewManager : ViewManager
     {
         ToggleSetEditMode();
         system = EventSystem.current;
-        animator = GetComponent<Animator>();
     }
+    //디테일뷰 삭제 시 오른쪽 버튼 삭제
     private void OnDestroy()
     {
         Destroy(rightNavgationViewButton.gameObject);
     }
-
+    //디테일 뷰에서 편집 후 세이브
     public void Save()
     {
         string name = nameInputField.text;
