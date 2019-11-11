@@ -97,7 +97,6 @@ public class DetatilViewManager : ViewManager
             Debug.Log("에디트 모드 아님 ");
         }
     }
-
     private new void Start()
     {
         ToggleSetEditMode();

@@ -48,7 +48,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             if (deleteMode)
             {
                 isSelectCell = false;
-                rightNavgationViewButton.GetComponent<Button>().interactable = false;
+                rightNavgationViewButton.SetInterlectable(false);
                 leftNavgationViewButton.SetTitle("완료");
                 foreach (Cell cell in cellList)
                 {
@@ -58,7 +58,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             else
             {
                 isSelectCell = true;
-                rightNavgationViewButton.GetComponent<Button>().interactable = true;
+                rightNavgationViewButton.SetInterlectable(true);
                 leftNavgationViewButton.SetTitle("편집");
                 foreach (Cell cell in cellList)
                 {
