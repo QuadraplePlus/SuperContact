@@ -42,21 +42,21 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             if (deleteMode)
             {
                 isSelectCell = false;
+                rightNavgationViewButton.GetComponent<Button>().interactable = false;
                 leftNavgationViewButton.SetTitle("완료");
                 foreach (Cell cell in cellList)
                 {
-                    cell.ActiveDelete = true;
-                    rightNavgationViewButton.GetComponent<Button>().interactable = false;
+                    cell.ActiveDelete = true;                
                 }
             }
             else
             {
                 isSelectCell = true;
+                rightNavgationViewButton.GetComponent<Button>().interactable = true;
                 leftNavgationViewButton.SetTitle("편집");
                 foreach (Cell cell in cellList)
                 {
                     cell.ActiveDelete = false;
-                    rightNavgationViewButton.GetComponent<Button>().interactable = true;
                 }
             }
         });     
@@ -72,8 +72,8 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             // 새로운 연락처를 추가했을때 할 일
             addPopupViewManager.addContactCallback = (contact) =>
             {
-                ClearCell();     
-                AddContact(contact);        
+                AddContact(contact);
+                ClearCell();
                 LoadData();
             };
             // AddPopupViewManager 열기
@@ -108,10 +108,13 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
         Cell cell;
         cell = Instantiate(cellPrefab, content).GetComponent<Cell>();
         cell.Title = contact.name;
-        if (contact.sprite)
+
+        cell.Sprite = SpriteManager.GetSprite(contact.photoName);
+        if (cell.Sprite == null)
         {
-            cell.Sprite = contact.sprite;
+            cell.Sprite = defaultSprite;
         }
+
         cell.cellDelegate = this;
         cellList.Add(cell);
 
@@ -167,13 +170,13 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
             Contact selectedContact = contacts.Value.contactList[cellIndex];
             detailViewManager.contact = selectedContact;
 
-            detailViewManager.userImage.sprite = contacts.Value.contactList[cellIndex].sprite;
+            detailViewManager.userImage.sprite = cell.Sprite;
 
             if (detailViewManager.userImage.sprite == null)
             {
                 detailViewManager.userImage.sprite = defaultSprite;
             }
-
+                
             detailViewManager.saveDelegate = (newContact) =>
             {
                 contacts.Value.contactList[cellIndex] = newContact;

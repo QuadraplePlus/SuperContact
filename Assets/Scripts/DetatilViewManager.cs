@@ -134,7 +134,9 @@ public class DetatilViewManager : ViewManager
             newContact.name = name;
             newContact.phoneNumber = phoneNum;
             newContact.email = emailInputField.text;
-            newContact.sprite = userImage.sprite;
+
+            if (userImage.sprite)
+                newContact.photoName = userImage.sprite.name;
             
             saveDelegate?.Invoke
                 (newContact);

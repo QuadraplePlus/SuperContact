@@ -25,7 +25,6 @@ public class AddPopupViewManager : PopupViewManager
             userImage.GetComponent<Image>().sprite = sprite;
         };
     }
-
     private void OnEnable()
     {
         InitInputField(nameInputField);
@@ -57,8 +56,7 @@ public class AddPopupViewManager : PopupViewManager
         string name = nameInputField.text;
         string phoneNumber = phoneNumberInputField.text;
         string email = emailInputField.text;
-        Sprite sprite = userImage.sprite;
-
+        
         bool isValid = true;
 
         if (name.Length < 1)
@@ -81,11 +79,12 @@ public class AddPopupViewManager : PopupViewManager
 
         if (isValid)
         {
-            Contact contact;
+            Contact contact = new Contact();
             contact.name = name;
             contact.phoneNumber = phoneNumber;
             contact.email = email;
-            contact.sprite = sprite;
+            if (userImage.sprite)
+                contact.photoName = userImage.sprite.name;
 
             // Main 화면에 Contact 객체 전달
             addContactCallback(contact);

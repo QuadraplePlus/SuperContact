@@ -16,10 +16,10 @@ public struct Contacts
 [System.Serializable]
 public struct Contact : IComparer<Contact>
 {
-    public string name;
+    public string name; 
     public string phoneNumber;
     public string email;
-    public Sprite sprite;
+    public string photoName;
 
     public int Compare(Contact x, Contact y)
     {

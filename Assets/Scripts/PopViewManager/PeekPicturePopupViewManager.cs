@@ -20,12 +20,11 @@ public class PeekPicturePopupViewManager : PopupViewManager , IPhotoCell
     protected override void Awake()
     {
         base.Awake();
-        sprites = Resources.LoadAll<Sprite>(Constant.kPhotoFolderName);
+        sprites = SpriteManager.Load();
         AddPhotoCell();
     }
     public void AddPhotoCell()
     {
-
         for (int i = 0; i < sprites.Length; i++)
         {
             PhotoCell photoCell;

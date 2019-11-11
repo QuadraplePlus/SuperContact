@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpriteManager : MonoBehaviour
 {
-    private static Dictionary<string, Sprite> cachSprites
+    private static Dictionary<string, Sprite> cachedSprites
         = new Dictionary<string, Sprite>();
 
     public static Sprite[] Load()
@@ -13,9 +13,9 @@ public class SpriteManager : MonoBehaviour
 
         foreach (Sprite sprite in sprites)
         {
-            if (!cachSprites.ContainsKey(sprite.name))
+            if (!cachedSprites.ContainsKey(sprite.name))
             {
-                cachSprites.Add(sprite.name , sprite);
+                cachedSprites.Add(sprite.name , sprite);
             }
         }
         return sprites;
@@ -23,18 +23,16 @@ public class SpriteManager : MonoBehaviour
 
     public static Sprite GetSprite(string name)
     {
-        if (!cachSprites.ContainsKey(name))
+        if (!cachedSprites.ContainsKey(name))
         {
-            Sprite sprite = Resources.Load<Sprite>(Constant.kPhotoFolderName + name);
-
-            if (sprite)
-                cachSprites.Add(sprite.name, sprite);
+            Sprite sprite = Resources.Load<Sprite>("photo/" + name);
+            if (sprite) cachedSprites.Add(sprite.name, sprite);
 
             return sprite;
         }
         else
         {
-            return cachSprites[name];
+            return cachedSprites[name];
         }
     }
 }
