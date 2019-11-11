@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
@@ -26,7 +27,6 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
     bool deleteMode = false;
     
     Contacts? contacts;
-
     private void Awake() 
     {
         // Title 지정
@@ -46,18 +46,20 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
                 foreach (Cell cell in cellList)
                 {
                     cell.ActiveDelete = true;
+                    rightNavgationViewButton.GetComponent<Button>().interactable = false;
                 }
             }
             else
             {
                 isSelectCell = true;
                 leftNavgationViewButton.SetTitle("편집");
-                    foreach (Cell cell in cellList)
-                    {
-                        cell.ActiveDelete = false;
-                    }
+                foreach (Cell cell in cellList)
+                {
+                    cell.ActiveDelete = false;
+                    rightNavgationViewButton.GetComponent<Button>().interactable = true;
                 }
-            });     
+            }
+        });     
         // Add 버튼 지정
         rightNavgationViewButton = Instantiate(buttonPrefab).GetComponent<SCButton>();
         rightNavgationViewButton.SetTitle("추가");

@@ -150,13 +150,6 @@ public class DetatilViewManager : ViewManager
         }
         return false;
     }   
-    public void OnClickNextPanel()
-    {
-        ThirdViewManager thirdViewManager
-            = Instantiate(thirdView).GetComponent<ThirdViewManager>();
-        mainManager.PresentViewManager(thirdViewManager);   
-    }
-
     public void PeekPopup()
     {
         PeekPicturePopupViewManager peekPicturePopupViewManager
