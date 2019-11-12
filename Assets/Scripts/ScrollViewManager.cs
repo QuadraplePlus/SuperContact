@@ -34,6 +34,8 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
     Contacts? contacts;
     private void Awake() 
     {
+        Application.targetFrameRate = 60;
+
         // Title 지정
         title = "수퍼연락처";
         isSelectCell = true;
@@ -232,5 +234,11 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
     public int Compare(Contact x, Contact y)
     {
         return x.name.CompareTo(y.name);
+    }
+    public void AppExit()
+    {
+        if (contacts.HasValue)
+            FileManager<Contacts>.Save(contacts.Value, Constant.kFileName);
+        Application.Quit();
     }
 }
