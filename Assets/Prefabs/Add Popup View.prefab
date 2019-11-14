@@ -1647,8 +1647,6 @@ MonoBehaviour:
   userImage: {fileID: 3674363799673815259}
   PeekPopupViewPrefab: {fileID: 4618613279977402436, guid: 16554f89647142949ac0a9b228ffa33a,
     type: 3}
-  peekPicture: {fileID: 3047740008046194543, guid: 16554f89647142949ac0a9b228ffa33a,
-    type: 3}
 --- !u!114 &4093587450579236139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,7 +1729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -105}
+  m_AnchoredPosition: {x: 0, y: -232}
   m_SizeDelta: {x: 300, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1987292774535119698

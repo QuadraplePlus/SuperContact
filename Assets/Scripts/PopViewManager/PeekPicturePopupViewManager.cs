@@ -28,7 +28,7 @@ public class PeekPicturePopupViewManager : PopupViewManager , IPhotoCell
     }
     //로드한 스프라이트를 토대로 추가된 포토셀을 설정하고 추가된 포토셀에 스프라이트를 할당
     public void AddPhotoCell()
-    {
+    {   
         for (int i = 0; i < sprites.Length; i++)
         {
             PhotoCell photoCell;

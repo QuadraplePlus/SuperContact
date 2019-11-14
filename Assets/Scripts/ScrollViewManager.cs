@@ -70,7 +70,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
         });     
         // Add 버튼 지정
         rightNavgationViewButton = Instantiate(buttonPrefab).GetComponent<SCButton>();
-        rightNavgationViewButton.SetTitle("추가");
+        rightNavgationViewButton.SetTitle(" + ");
         rightNavgationViewButton.SetOnClickAction(() =>
         {
             // AddPopupViewManager를 표시하는 동작 구현
