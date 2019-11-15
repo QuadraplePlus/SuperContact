@@ -51,7 +51,7 @@ public class ImageButton : MonoBehaviour
         if(addPhotoPopupViewPrefab)
         {
             PeekPicturePopupViewManager peekPicturePopupViewManager
-                = Instantiate(addPhotoPopupViewPrefab, MainManager.Instance.transform).GetComponent<PeekPicturePopupViewManager>();
+                = Instantiate(addPhotoPopupViewPrefab, NavigationManager.Instance.transform).GetComponent<PeekPicturePopupViewManager>();
 
             peekPicturePopupViewManager.PeekPictureOpne();
             PeekPicturePopupViewManager.sendImage = (sprite) =>

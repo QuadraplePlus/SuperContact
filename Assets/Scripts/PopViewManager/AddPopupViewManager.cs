@@ -125,7 +125,7 @@ public class AddPopupViewManager : PopupViewManager
     public void PeekPopup()
     {
         PeekPicturePopupViewManager peekPicturePopupViewManager
-            = Instantiate(PeekPopupViewPrefab , transform.parent).GetComponent<PeekPicturePopupViewManager>();
+            = Instantiate(PeekPopupViewPrefab , NavigationManager.Instance.transform.parent.parent).GetComponent<PeekPicturePopupViewManager>();
         peekPicturePopupViewManager.PeekPictureOpne();
     }
 }

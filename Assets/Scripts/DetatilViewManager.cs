@@ -158,7 +158,7 @@ public class DetatilViewManager : ViewManager
     public void PeekPopup()
     {
         PeekPicturePopupViewManager peekPicturePopupViewManager
-            = Instantiate(PeekPopupViewPrefab, mainManager.transform).GetComponent<PeekPicturePopupViewManager>();
+            = Instantiate(PeekPopupViewPrefab, mainManager.transform.parent.parent).GetComponent<PeekPicturePopupViewManager>();
         peekPicturePopupViewManager.PeekPictureOpne();
     }
 }

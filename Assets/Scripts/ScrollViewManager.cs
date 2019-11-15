@@ -75,7 +75,7 @@ public class ScrollViewManager : ViewManager, ICell , IComparer<Contact>
         {
             // AddPopupViewManager를 표시하는 동작 구현
             AddPopupViewManager addPopupViewManager =
-                Instantiate(addPopupViewPrefab, mainManager.transform).GetComponent<AddPopupViewManager>();
+                Instantiate(addPopupViewPrefab, mainManager.transform.parent.parent).GetComponent<AddPopupViewManager>();
 
             // 새로운 연락처를 추가했을때 할 일
             addPopupViewManager.addContactCallback = (contact) =>

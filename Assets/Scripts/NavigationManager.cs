@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainManager : MonoBehaviour
+public class NavigationManager : MonoBehaviour
 {
     // Prefab
     [SerializeField] GameObject alertPopupViewPrefab;   // 첫 실행시 나타날 Popup 창 Prefab
@@ -15,18 +15,18 @@ public class MainManager : MonoBehaviour
     // Present한 ViewManager들
     Stack<ViewManager> viewManagers = new Stack<ViewManager>();
 
-    public static MainManager Instance;
+    public static NavigationManager Instance;
 
-    //private void Awake()
-    //{
-    //    if (Instance == null)
-    //    {
-    //        Instantiate(Instance);
-    //    }
-    //}
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
-    {   
+    {
         // Welcome 메시지 출력
         if (PlayerPrefs.GetInt(Constant.kIsFirst, 1) == 1)
         {
@@ -39,13 +39,13 @@ public class MainManager : MonoBehaviour
         }
 
         // Scroll View 만들어서 화면에 배치
-        ScrollViewManager scrollViewManager = 
+        ScrollViewManager scrollViewManager =
             Instantiate(scrollViewPrefab, transform).GetComponent<ScrollViewManager>();
         PresentViewManager(scrollViewManager);
     }
 
     // 새로운 화면 Content에 표시하기
-    public void PresentViewManager(ViewManager viewManager, bool isAnimated=false)
+    public void PresentViewManager(ViewManager viewManager, bool isAnimated = false)
     {
         viewManager.transform.SetParent(content);
         viewManager.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -68,7 +68,7 @@ public class MainManager : MonoBehaviour
         if (viewManager.rightNavgationViewButton)
         {
             viewManager.rightNavgationViewButton.transform.SetParent(navigationView.RightButtonArea);
-            viewManager.rightNavgationViewButton.GetComponent<RectTransform>().anchoredPosition 
+            viewManager.rightNavgationViewButton.GetComponent<RectTransform>().anchoredPosition
                 = Vector2.zero;
             viewManager.rightNavgationViewButton.GetComponent<RectTransform>().sizeDelta
                 = Vector2.zero;
@@ -86,7 +86,7 @@ public class MainManager : MonoBehaviour
                 = Vector2.one;
         }
         //TODO : 이전화면 Navigation Button 을 비활성화
-        if (viewManagers.Count > 0 )
+        if (viewManagers.Count > 0)
         {
             ViewManager oldViewManager = viewManagers.Peek();
             if (oldViewManager.rightNavgationViewButton)
